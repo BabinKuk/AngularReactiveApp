@@ -1,0 +1,9 @@
+<h3>{{ lesson?.description }}</h3>
+<h5>Duration: {{ lesson?.duration }}</h5>
+
+<div class="embed-responsive embed-responsive-16by9" *ngIf="lesson?.videoUrl">
+  <iframe class="embed-responsive-item" [src]="lesson?.videoUrl | safeUrl" allowfullscreen></iframe>
+</div>
+<br>
+<h5>Description</h5>
+<p>{{ lesson?.longDescription }}</p>

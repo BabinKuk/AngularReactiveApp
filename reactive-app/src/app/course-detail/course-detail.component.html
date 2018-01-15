@@ -1,0 +1,33 @@
+<h4>Using local rest api</h4>
+<br>
+<div class="card" *ngIf="(course$ | async) as course else loadingCourse">
+  <img class="card-img-top" src="{{course.iconUrl}}" alt="Card image cap">
+  <div class="card-body">
+    <h3 class="card-title">{{ course.description }}</h3>
+    <p class="card-text">{{ course.longDescription }}</p>
+
+    <hr class="my-4">
+    <p class="lead">Total number of lessons: {{ (course$ | async)?.lessons.length }}</p>
+
+    <div *ngIf="detail$ | async as lessonDetail else masterTmpl">
+      <button type="button" class="btn btn-primary" (click)="backToMaster()">Back</button>
+      <br>
+
+      <lesson-details [lesson]="lessonDetail"></lesson-details>
+    </div>
+
+    <ng-template #masterTmpl>
+      <!--pagination buttons-->
+      <button type="button" class="btn btn-primary" (click)="prevLessonPage()">Previous</button>
+      <button type="button" class="btn btn-primary" (click)="nextLessonPage()">Next</button>
+      <br>
+
+      <lessons-list [lessons]="lessons$ | async" (selected)="getLessonDetails($event)"></lessons-list>
+    </ng-template>
+
+  </div>
+</div>
+
+<ng-template #loadingCourse>
+  <div>Loading ...</div>
+</ng-template>

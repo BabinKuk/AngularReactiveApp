@@ -1,0 +1,36 @@
+<h4>Using firebase</h4>
+<br>
+
+<div *ngIf="(course$ | async) as course else loadingCourse">
+  <div class="card">
+    <img class="card-img-top" src="{{course.iconUrl}}" alt="Card image cap">
+    <div class="card-body">
+      <h3 class="card-title">{{ course.description }}</h3>
+      <p class="card-text">{{ course.longDescription }}</p>
+
+      <hr class="my-4">
+      <p class="lead">Total number of lessons: {{ (lessons$ | async)?.length }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="details else masterTmpl">
+
+    <div class="card" style="margin-top:20px;">
+      <div class="card-body nav justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="backToMaster()">Back</button>
+      </div>
+
+      <lesson [lesson]="details"></lesson>
+
+    </div>
+  </div>
+
+  <ng-template #masterTmpl>
+    <lessons [lessons]="lessons$ | async" (selected)="getLessonDetails($event)"></lessons>
+  </ng-template>
+
+</div>
+
+<ng-template #loadingCourse>
+  <div>Loading ...</div>
+</ng-template>

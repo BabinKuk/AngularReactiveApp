@@ -1,0 +1,8 @@
+<div class="card-body">
+  <h4 class="card-title text-center">{{ lesson.description }}</h4>
+  <p class="card-text">{{ lesson.longDescription }}</p>
+  <div class="embed-responsive embed-responsive-16by9" *ngIf="lesson.videoUrl">
+    <iframe class="embed-responsive-item" [src]="lesson.videoUrl | safeUrl" allowfullscreen></iframe>
+  </div>
+</div>
+

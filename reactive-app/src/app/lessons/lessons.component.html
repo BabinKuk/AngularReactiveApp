@@ -1,0 +1,26 @@
+<div id="parent">
+  <div class="list-group" *ngIf="lessons else loadingLessons">
+    <a class="list-group-item list-group-item-action flex-column align-items-start"
+      *ngFor="let lesson of lessons; let idx = index"
+      data-toggle="collapse" data-target="#{{idx}}" data-parent="#parent"
+      (click)="select(lesson)">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ lesson.description }}</h5>
+        <small class="text-muted">{{ lesson.duration }}</small>
+      </div>
+      <div id="{{idx}}" class="details" [class.active]="isSelected(lesson)">
+        <p class="mb-1">{{ lesson.longDescription }}</p>
+        <!-- <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" [src]="lesson.videoUrl | safeUrl" allowfullscreen></iframe>
+        </div> -->
+        <div class="card-body nav justify-content-center">
+          <button type="button" class="btn btn-primary" (click)="getDetails(lesson)">Details</button>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <ng-template #loadingLessons>
+    <div>Loading ...</div>
+  </ng-template>
+</div>

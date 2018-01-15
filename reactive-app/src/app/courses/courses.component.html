@@ -1,0 +1,21 @@
+<p>
+  using local rest api
+</p>
+<div class="card-deck" *ngIf="(courses$ | async) as courses else loadingCourses">
+  <div class="card" *ngFor="let course of courses">
+    <a [routerLink]="['/api/courses', course.id]" class="list-group-item list-group-item-action flex-column align-items-start">
+      <img class="card-img-top" src="{{course.iconUrl}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{ course.description }}</h5>
+        <p class="card-text">{{ course.longDescription }}</p>
+      </div>
+    </a>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingCourses>
+  <div>Loading ...</div>
+</ng-template>
